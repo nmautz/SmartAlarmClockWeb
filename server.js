@@ -5,6 +5,7 @@ app.set('view engine', 'ejs');
 
 
 app.get('/', function(req, res) {
+    console.log("Serving index")
     res.render('index', {title: 'Hello World!'})
 });
 
