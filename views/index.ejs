@@ -159,11 +159,38 @@ body{
 <script>
 
     var alarm_row_expanded = false;
+    var alarm_set = false;
     var time = {
         hour: 6,
         min: 30
     }
 
+    function toggle_alarm_set(){
+
+        if(alarm_set){
+            disable_alarm();
+            alarm_set = false;
+        }else{
+            set_alarm();
+            alarm_set = true;
+        }
+
+
+    }
+
+    function set_alarm(){
+        const alarm_set_text = document.getElementById("alarm-set-text");
+        alarm_set_text.innerHTML = "Alarm\n Enabled";
+        alarm_set_text.style.color = "green";
+
+    }
+
+    function disable_alarm(){
+        const alarm_set_text = document.getElementById("alarm-set-text");
+        alarm_set_text.innerHTML = "Alarm\n Disabled";
+        alarm_set_text.style.color = "red";
+
+    }
     function toggle_alarm_row(){
         if(alarm_row_expanded){
             shrink_alarm_row();
@@ -295,6 +322,9 @@ body{
         const inc_min = document.getElementById("inc-min");
         const dec_hour = document.getElementById("dec-hour");
         const dec_min = document.getElementById("dec-min");
+        const alarm_set_text = document.getElementById("alarm-set-text");
+
+        disable_alarm();
 
         alarm_row.addEventListener("click", toggle_alarm_row);
 
@@ -326,6 +356,12 @@ body{
             e.stopPropagation();
         });
 
+        alarm_set_text.addEventListener("click", (e)=>{
+            toggle_alarm_set();
+            e.stopPropagation();
+        });
+
+
         
 
 
@@ -342,7 +378,7 @@ body{
 
         <div id="alarm-set-row" class="row-item">
 
-            <h1>Alarm<br>Set</h1>
+            <h1 id="alarm-set-text">Alarm<br>Set</h1>
             
 
         </div>
