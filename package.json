@@ -1,0 +1,23 @@
+{
+  "name": "smartalarmclockweb",
+  "version": "1.0.0",
+  "description": "Web Interface for Smart Alarm",
+  "main": "server.js",
+  "scripts": {
+    "test": "debug",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nmautz/SmartAlarmClockWeb.git"
+  },
+  "keywords": [
+    "Smart"
+  ],
+  "author": "Nathan, Sean, Luke",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nmautz/SmartAlarmClockWeb/issues"
+  },
+  "homepage": "https://github.com/nmautz/SmartAlarmClockWeb#readme"
+}
