@@ -31,6 +31,7 @@ body{
     padding: 0;
     width: 100vw;
     border-bottom: 1px solid black;
+    transition: all 500ms ease-in-out;
 }
 
 #song-img{
@@ -46,26 +47,47 @@ body{
 
 
     </style>
+
+
+<script>
+
+    document.addEventListener("click", ()=>{
+
+        const alarm_row = document.getElementById("alarm-row");
+        const alarm_set_row = document.getElementById("alarm-set-row");
+        const song_row = document.getElementById("song-row");
+
+        alarm_row.addEventListener("click", ()=>{
+            song_row.style.height = "0vh";
+            alarm_row.style.height = "100vh";
+        })
+
+
+
+    })
+
+
+</script>
 </head>
 <body>
 
     <div id="main-display">
 
 
-        <div class="row-item">
+        <div id="alarm-set-row" class="row-item">
 
             <h1>Alarm<br>Set</h1>
             
 
         </div>
 
-        <div class="row-item">
+        <div id="alarm-row" class="row-item">
 
             <h1 id="alarm-text">06:30</h1>
 
         </div>
 
-        <div class="row-item" style="height: 100vh; width: 100vw;">
+        <div id="song-row" class="row-item" style="height: 100vh; width: 100vw;">
 
             <img id="song-img" src="https://media.timeout.com/images/102187439/image.jpg" alt="song-img" height="200px" width="200px" style="object-fit:cover;">
             <h2 id="song-name">Wesleys Theory</h2>
