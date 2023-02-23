@@ -68,6 +68,7 @@ body{
     align-items: center;
     justify-content: center;
     height: 100%;
+    transition: all 300ms ease-in-out;
 }
 
 
@@ -122,10 +123,27 @@ body{
 
 <script>
 
+    var alarm_row_expanded = false;
+    var time = {
+        hour: 6,
+        min: 30
+    }
+
+    function toggle_alarm_row(){
+        if(alarm_row_expanded){
+            shrink_alarm_row();
+            alarm_row_expanded = false;
+        }else{
+            expand_alarm_row();
+            alarm_row_expanded = true;
+        }
+    }
+
     function expand_alarm_row(){
 
         const alarm_row = document.getElementById("alarm-row");
         const alarm_set_row = document.getElementById("alarm-set-row");
+        const alarm_text = document.getElementById("alarm-text");
         const song_row = document.getElementById("song-row");
         const inc_hour = document.getElementById("inc-hour");
         const inc_min = document.getElementById("inc-min");
@@ -134,14 +152,71 @@ body{
 
         song_row.style.flex = "0";
         alarm_row.style.flex = "10";
+        alarm_text.style.padding = "5vh";
+        alarm_text.style.height = "40vh";
+        
 
         inc_hour.style.display = "block";
         inc_min.style.display = "block";
         dec_hour.style.display = "block";
         dec_min.style.display = "block";
 
+    }
+
+    function shrink_alarm_row(){
+        const alarm_row = document.getElementById("alarm-row");
+        const alarm_set_row = document.getElementById("alarm-set-row");
+        const song_row = document.getElementById("song-row");
+        const inc_hour = document.getElementById("inc-hour");
+        const inc_min = document.getElementById("inc-min");
+        const dec_hour = document.getElementById("dec-hour");
+        const dec_min = document.getElementById("dec-min");
+
+        song_row.style.flex = "8";
+        alarm_row.style.flex = "3";
+
+        inc_hour.style.display = "none";
+        inc_min.style.display = "none";
+        dec_hour.style.display = "none";
+        dec_min.style.display = "none";
+
+    }
+
+    function update_clock(){
+
+        const hour = document.getElementById("alarm-hour");
+        const min = document.getElementById("alarm-min");
+        let s_hour = time.hour;
+        let s_min = time.min;
+        if(time.hour < 10){
+            s_hour = "0" + time.hour;
+        }
+        if(time.min < 10){
+            s_min = "0" + time.min;
+        }
+        hour.innerHTML = s_hour;
+        min.innerHTML = s_min;
+    }
 
 
+    function inc_clock_hour(){
+
+        time.hour++;
+
+        
+
+    }
+
+    function inc_clock_min(){
+        time.min+=5;
+    }
+
+    function dec_clock_hour(){
+        time.hour--;
+    }
+
+    function dec_clock_min(){
+        time.min-=5;
     }
 
     document.addEventListener("DOMContentLoaded", ()=>{
@@ -150,8 +225,42 @@ body{
         const alarm_set_row = document.getElementById("alarm-set-row");
         const song_row = document.getElementById("song-row");
 
-        alarm_row.addEventListener("click", expand_alarm_row);
+        const inc_hour = document.getElementById("inc-hour");
+        const inc_min = document.getElementById("inc-min");
+        const dec_hour = document.getElementById("dec-hour");
+        const dec_min = document.getElementById("dec-min");
 
+        alarm_row.addEventListener("click", toggle_alarm_row);
+
+        inc_hour.addEventListener("click", (e)=>{
+
+            inc_clock_hour();
+            update_clock();
+            e.stopPropagation();
+        });
+
+        inc_min.addEventListener("click", (e)=>{
+
+            inc_clock_min();
+            update_clock();
+            e.stopPropagation();
+        });
+
+        dec_hour.addEventListener("click", (e)=>{
+
+            dec_clock_hour();
+            update_clock();
+            e.stopPropagation();
+        });
+
+        dec_min.addEventListener("click", (e)=>{
+
+            dec_clock_min();
+            update_clock();
+            e.stopPropagation();
+        });
+
+        
 
 
     })
