@@ -119,6 +119,30 @@ body{
 
     position: absolute;
     display: none;
+    bottom: 10vh;
+    left: 10vw;
+    opacity: 0;
+
+    height: 50px;
+    width: 75px;
+    background-color: unset;
+    border-radius: 20px;
+    transition: all 1000ms ease-in-out !important;
+
+}
+
+#auto_schedule_btn{
+
+    position: absolute;
+    display: none;
+    bottom: 10vh;
+    right: 10vw;
+    opacity: 0;
+
+    height: 50px;
+    width: 75px;
+    background-color: unset;
+    border-radius: 20px;
 }
 
 
@@ -156,6 +180,9 @@ body{
         const inc_min = document.getElementById("inc-min");
         const dec_hour = document.getElementById("dec-hour");
         const dec_min = document.getElementById("dec-min");
+        const cancel_edit_btn = document.getElementById("cancel_edit_btn");
+        const auto_schedule_btn = document.getElementById("auto_schedule_btn");
+
 
         song_row.style.flex = "0";
         alarm_row.style.flex = "10";
@@ -167,6 +194,13 @@ body{
         inc_min.style.display = "block";
         dec_hour.style.display = "block";
         dec_min.style.display = "block";
+
+        cancel_edit_btn.style.display = "block";
+        auto_schedule_btn.style.display = "block";
+
+        cancel_edit_btn.style.opacity = "1";
+        auto_schedule_btn.style.opacity = "1";
+
 
     }
 
@@ -180,6 +214,8 @@ body{
         const inc_min = document.getElementById("inc-min");
         const dec_hour = document.getElementById("dec-hour");
         const dec_min = document.getElementById("dec-min");
+        const cancel_edit_btn = document.getElementById("cancel_edit_btn");
+        const auto_schedule_btn = document.getElementById("auto_schedule_btn");
 
         song_row.style.flex = "8";
         alarm_row.style.flex = "3";
@@ -190,6 +226,12 @@ body{
         inc_min.style.display = "none";
         dec_hour.style.display = "none";
         dec_min.style.display = "none";
+
+
+        cancel_edit_btn.style.display = "none";
+        auto_schedule_btn.style.display = "none";
+        cancel_edit_btn.style.opacity = "0";
+        auto_schedule_btn.style.opacity = "0";
 
     }
 
@@ -295,6 +337,7 @@ body{
         <div id="alarm-row" class="row-item">
 
             <button id="cancel_edit_btn">X</button>
+            <button id="auto_schedule_btn">AUTO</button>
 
             <div id="alarm-text">
                 <div id="alarm-left">
