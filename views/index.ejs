@@ -168,6 +168,13 @@ body{
         min: 30,
         meridium: "AM"
     }
+    var time_cache = {
+        hour: 6,
+        min: 30,
+        meridium: "AM"
+    }
+
+    copy_time(time, time_cache)
 
     function toggle_alarm_set(){
 
@@ -198,15 +205,14 @@ body{
     function toggle_alarm_row(){
         if(alarm_row_expanded){
             shrink_alarm_row();
-            alarm_row_expanded = false;
         }else{
             expand_alarm_row();
-            alarm_row_expanded = true;
         }
     }
 
     function expand_alarm_row(){
 
+        alarm_row_expanded = true;
         const alarm_row = document.getElementById("alarm-row");
         const alarm_set_row = document.getElementById("alarm-set-row");
         const alarm_text = document.getElementById("alarm-text");
@@ -247,6 +253,11 @@ body{
     }
 
     function shrink_alarm_row(){
+
+        alarm_row_expanded = false;
+        copy_time(time, time_cache);
+        console.log(time_cache)
+
         const alarm_row = document.getElementById("alarm-row");
         const alarm_set_row = document.getElementById("alarm-set-row");
         const alarm_text = document.getElementById("alarm-text");
@@ -303,6 +314,14 @@ body{
         hour.innerHTML = s_hour;
         min.innerHTML = s_min;
         am_pm.innerHTML = time.meridium;
+
+    }
+
+    function copy_time(src, dst){
+
+        dst.hour = src.hour;
+        dst.min = src.min;
+        dst.meridium = src.meridium;
 
     }
 
@@ -364,6 +383,8 @@ body{
         const up_am_pm = document.getElementById("up-am-pm");
         const down_am_pm = document.getElementById("down-am-pm");
         const alarm_set_text = document.getElementById("alarm-set-text");
+        const cancel_edit_btn = document.getElementById("cancel_edit_btn");
+        const auto_schedule_btn = document.getElementById("auto_schedule_btn");
 
         disable_alarm();
         update_clock();
@@ -415,6 +436,13 @@ body{
             e.stopPropagation();
         });
 
+        cancel_edit_btn.addEventListener("click", (e)=>{
+            
+            copy_time(time_cache, time)
+            update_clock();
+            shrink_alarm_row();
+            e.stopPropagation();
+        });
 
         
 
