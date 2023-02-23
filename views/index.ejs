@@ -50,16 +50,26 @@ body{
 
 <script>
 
-    document.addEventListener("click", ()=>{
+    function expand_alarm_row(){
+
+        console.log(11)
+        const alarm_row = document.getElementById("alarm-row");
+        const alarm_set_row = document.getElementById("alarm-set-row");
+        const song_row = document.getElementById("song-row");
+
+        song_row.style.height = "0vh";
+        alarm_row.style.flex = "5";
+
+    }
+
+    document.addEventListener("DOMContentLoaded", ()=>{
 
         const alarm_row = document.getElementById("alarm-row");
         const alarm_set_row = document.getElementById("alarm-set-row");
         const song_row = document.getElementById("song-row");
 
-        alarm_row.addEventListener("click", ()=>{
-            song_row.style.height = "0vh";
-            alarm_row.style.flex = "5";
-        })
+        alarm_row.addEventListener("click", expand_alarm_row);
+        alarm_row.addEventListener("touchstart", expand_alarm_row);
 
 
 
