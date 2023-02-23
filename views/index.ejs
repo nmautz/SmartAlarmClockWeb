@@ -295,6 +295,9 @@ body{
     function inc_clock_hour(){
 
         time.hour++;
+        if(time.hour > 12){
+            time.hour = 1;
+        }
 
         
 
@@ -302,14 +305,23 @@ body{
 
     function inc_clock_min(){
         time.min+=5;
+        if(time.min > 55){
+            time.min = 0;
+        }
     }
 
     function dec_clock_hour(){
         time.hour--;
+        if(time.hour < 1){
+            time.hour = 12;
+        }
     }
 
     function dec_clock_min(){
         time.min-=5;
+        if(time.min < 0){
+            time.min = 55;
+        }
     }
 
     document.addEventListener("DOMContentLoaded", ()=>{
