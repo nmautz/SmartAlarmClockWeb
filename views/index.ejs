@@ -156,7 +156,8 @@ body{
     var alarm_set = false;
     var time = {
         hour: 6,
-        min: 30
+        min: 30,
+        meridium: "AM"
     }
 
     function toggle_alarm_set(){
@@ -281,6 +282,7 @@ body{
 
         const hour = document.getElementById("alarm-hour");
         const min = document.getElementById("alarm-min");
+        const am_pm = document.getElementById("am-pm");
         let s_hour = time.hour;
         let s_min = time.min;
         if(time.hour < 10){
@@ -291,6 +293,8 @@ body{
         }
         hour.innerHTML = s_hour;
         min.innerHTML = s_min;
+        am_pm.innerHTML = time.meridium;
+
     }
 
 
@@ -326,6 +330,14 @@ body{
         }
     }
 
+    function toggle_meridiem(){
+        if(time.meridium == "AM"){
+            time.meridium = "PM";
+        }else{
+            time.meridium = "AM";
+        }
+    }
+
     document.addEventListener("DOMContentLoaded", ()=>{
 
         const alarm_row = document.getElementById("alarm-row");
@@ -336,9 +348,12 @@ body{
         const inc_min = document.getElementById("inc-min");
         const dec_hour = document.getElementById("dec-hour");
         const dec_min = document.getElementById("dec-min");
+        const up_am_pm = document.getElementById("up-am-pm");
+        const down_am_pm = document.getElementById("down-am-pm");
         const alarm_set_text = document.getElementById("alarm-set-text");
 
         disable_alarm();
+        update_clock();
 
         alarm_row.addEventListener("click", toggle_alarm_row);
 
@@ -372,6 +387,18 @@ body{
 
         alarm_set_text.addEventListener("click", (e)=>{
             toggle_alarm_set();
+            e.stopPropagation();
+        });
+
+        up_am_pm.addEventListener("click", (e)=>{
+            toggle_meridiem();
+            update_clock();
+            e.stopPropagation();
+        });
+
+        down_am_pm.addEventListener("click", (e)=>{
+            toggle_meridiem();
+            update_clock();
             e.stopPropagation();
         });
 
@@ -427,7 +454,7 @@ body{
                     
                     <h1 id="up-am-pm">^</h1>
 
-                    AM
+                    <p id="am-pm">AM</p>
                 
                     <h1 id="down-am-pm">^</h1>
 
