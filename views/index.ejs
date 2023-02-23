@@ -314,7 +314,7 @@ body{
         time.min+=5;
         if(time.min > 55){
             time.min = 0;
-            time.hour++;
+            inc_clock_hour();
         }
     }
 
@@ -330,7 +330,7 @@ body{
         time.min-=5;
         if(time.min < 0){
             time.min = 55;
-            time.hour--;
+            dec_clock_hour();
         }
     }
 
