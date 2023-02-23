@@ -180,16 +180,15 @@ body{
 
         if(alarm_set){
             disable_alarm();
-            alarm_set = false;
         }else{
             set_alarm();
-            alarm_set = true;
         }
 
 
     }
 
     function set_alarm(){
+        alarm_set = true;
         const alarm_set_text = document.getElementById("alarm-set-text");
         alarm_set_text.innerHTML = "Alarm\n Enabled";
         alarm_set_text.style.color = "green";
@@ -197,6 +196,7 @@ body{
     }
 
     function disable_alarm(){
+        alarm_set = false;
         const alarm_set_text = document.getElementById("alarm-set-text");
         alarm_set_text.innerHTML = "Alarm\n Disabled";
         alarm_set_text.style.color = "red";
