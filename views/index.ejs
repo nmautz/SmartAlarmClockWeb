@@ -36,6 +36,7 @@ body{
     position: relative;
     min-height: 0;
     overflow: hidden;
+    display: flex;
 }
 
 #alarm-set-row{
@@ -57,6 +58,16 @@ body{
 
     padding-top: 5vh;
 
+}
+
+#current-song-container{
+    transition: all 300ms ease-in-out;
+    flex: 2;
+}
+
+#more-songs-container{
+    flex:0;
+    overflow: hidden;
 }
 
 #alarm-text{
@@ -528,10 +539,25 @@ body{
         </div>
 
         <div id="song-row" class="row-item">
+            <div id="current-song-container">
+                <img id="song-img" src="https://media.timeout.com/images/102187439/image.jpg" alt="song-img" height="200px" width="200px" style="object-fit:cover;">
+                <h2 id="song-name">Wesleys Theory</h2>
+                <h3 id="song-artist">Kendrick Lamar</h3>
+            </div>
 
-            <img id="song-img" src="https://media.timeout.com/images/102187439/image.jpg" alt="song-img" height="200px" width="200px" style="object-fit:cover;">
-            <h2 id="song-name">Wesleys Theory</h2>
-            <h3 id="song-artist">Kendrick Lamar</h3>
+            <div id="more-songs-container">
+                <h1>More Songs</h1>
+                <ul>
+                    <li>Song 1</li>
+                    <li>Song 2</li>
+                    <li>Song 3</li>
+                    <li>Song 4</li>
+                    <li>Song 5</li>
+                    <li>Song 6</li>
+                </ul>
+
+            </div>
+
         </div>
 
 
