@@ -372,6 +372,15 @@ body{
 
     document.addEventListener("DOMContentLoaded", ()=>{
 
+        //detect if mobile device 
+        if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+
+            //Mobile Device
+
+        }else{
+            alert("This app is not optimized for desktop. Please use a mobile device for the best experience.")
+        }
+
         const alarm_row = document.getElementById("alarm-row");
         const alarm_set_row = document.getElementById("alarm-set-row");
         const song_row = document.getElementById("song-row");
