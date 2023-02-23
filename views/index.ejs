@@ -114,6 +114,13 @@ body{
 
 }
 
+#cancel_edit_btn{
+
+
+    position: absolute;
+    display: none;
+}
+
 
 
 
@@ -166,6 +173,8 @@ body{
     function shrink_alarm_row(){
         const alarm_row = document.getElementById("alarm-row");
         const alarm_set_row = document.getElementById("alarm-set-row");
+        const alarm_text = document.getElementById("alarm-text");
+
         const song_row = document.getElementById("song-row");
         const inc_hour = document.getElementById("inc-hour");
         const inc_min = document.getElementById("inc-min");
@@ -174,6 +183,8 @@ body{
 
         song_row.style.flex = "8";
         alarm_row.style.flex = "3";
+        alarm_text.style.padding = "0vh";
+        alarm_text.style.height = "unset";
 
         inc_hour.style.display = "none";
         inc_min.style.display = "none";
@@ -282,6 +293,8 @@ body{
         </div>
 
         <div id="alarm-row" class="row-item">
+
+            <button id="cancel_edit_btn">X</button>
 
             <div id="alarm-text">
                 <div id="alarm-left">
