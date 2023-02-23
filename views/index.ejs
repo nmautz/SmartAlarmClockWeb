@@ -21,6 +21,8 @@ body{
     width: 100%;
     align-items: center;
     justify-content: start;
+    transition: all 300ms ease-in-out;
+
     margin: 0;
 }
 .row-item{
@@ -32,7 +34,21 @@ body{
     border-bottom: 1px solid black;
     transition: all 300ms ease-in-out;
     position: relative;
+    min-height: 0;
 }
+
+#alarm-set-row{
+    height: fit-content;
+}
+
+#alarm-row{
+    flex:3;
+}
+
+#song-row{
+    flex:8;
+}
+
 
 #song-img{
 
@@ -42,24 +58,43 @@ body{
 }
 
 #alarm-text{
-    font-size: 6em;
+    font-size: 4em;
     margin: 0;
     padding: 0;
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
 }
 
+
+
+
+#alarm-left, #alarm-right{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+
+
+#alarm-hour, #alarm-min{
+    margin: 0;
+   
+    padding: 0;
+}
 
 #inc-hour, #inc-min, #dec-hour, #dec-min{
     font-size: 3em;
     margin: 0;
     padding: 0;
     cursor: pointer;
-    position: absolute;
     display: none;
+    font-size: 1em;
 }
 
 #inc-hour{
-
-
 
 }
 
@@ -89,10 +124,18 @@ body{
         const alarm_row = document.getElementById("alarm-row");
         const alarm_set_row = document.getElementById("alarm-set-row");
         const song_row = document.getElementById("song-row");
+        const inc_hour = document.getElementById("inc-hour");
+        const inc_min = document.getElementById("inc-min");
+        const dec_hour = document.getElementById("dec-hour");
+        const dec_min = document.getElementById("dec-min");
 
-        song_row.style.height = "0vh";
-        alarm_row.style.flex = "5";
-        alarm_row.style.paddingTop = "10vh";
+        song_row.style.flex = "0";
+        alarm_row.style.flex = "10";
+
+        inc_hour.style.display = "block";
+        inc_min.style.display = "block";
+        dec_hour.style.display = "block";
+        dec_min.style.display = "block";
 
 
 
@@ -128,16 +171,33 @@ body{
 
         <div id="alarm-row" class="row-item">
 
-            <h1 id="inc-hour">^</h1>
-            <h1 id="inc-min">^</h1>
-            <h1 id="dec-hour" >^</h1>
-            <h1 id="dec-min">^</h1>
+            <div id="alarm-text">
+                <div id="alarm-left">
+                    <h1 id="inc-hour">^</h1>
+                    <h1 id="alarm-hour">06</h1>
+                    <h1 id="dec-hour" >^</h1>
 
-            <h1 id="alarm-text">06:30</h1>
+
+                
+                </div>
+
+                <h1 style=" margin:0;">:</h1> 
+
+                <div id="alarm-right">
+                    <h1 id="inc-min">^</h1>
+
+                    <h1 id="alarm-min">30</h1>
+                    <h1 id="dec-min">^</h1>
+
+
+                </div>
+
+            </div>
+
 
         </div>
 
-        <div id="song-row" class="row-item" style="height: 100vh; width: 100vw;">
+        <div id="song-row" class="row-item">
 
             <img id="song-img" src="https://media.timeout.com/images/102187439/image.jpg" alt="song-img" height="200px" width="200px" style="object-fit:cover;">
             <h2 id="song-name">Wesleys Theory</h2>
