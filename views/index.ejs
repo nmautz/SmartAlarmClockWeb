@@ -93,7 +93,7 @@ body{
     padding: 0;
 }
 
-#inc-hour, #inc-min, #dec-hour, #dec-min{
+#inc-hour, #inc-min, #dec-hour, #dec-min, #up-am-pm, #down-am-pm{
     font-size: 3em;
     margin: 0;
     padding: 0;
@@ -102,22 +102,11 @@ body{
     font-size: 1em;
 }
 
-#inc-hour{
 
-}
-
-#inc-min{
-
-}
-
-#dec-hour{
+#dec-hour, #dec-min, #down-am-pm{
     transform: rotate(180deg);
 }
 
-#dec-min{
-    transform: rotate(180deg);
-
-}
 
 #cancel_edit_btn, #auto_schedule_btn{
 
@@ -216,6 +205,8 @@ body{
         const inc_min = document.getElementById("inc-min");
         const dec_hour = document.getElementById("dec-hour");
         const dec_min = document.getElementById("dec-min");
+        const up_am_pm = document.getElementById("up-am-pm");
+        const down_am_pm = document.getElementById("down-am-pm");
         const cancel_edit_btn = document.getElementById("cancel_edit_btn");
         const auto_schedule_btn = document.getElementById("auto_schedule_btn");
 
@@ -230,6 +221,8 @@ body{
         inc_min.style.display = "block";
         dec_hour.style.display = "block";
         dec_min.style.display = "block";
+        up_am_pm.style.display = "block";
+        down_am_pm.style.display = "block";
 
         cancel_edit_btn.style.display = "block";
         auto_schedule_btn.style.display = "block";
@@ -253,6 +246,8 @@ body{
         const inc_min = document.getElementById("inc-min");
         const dec_hour = document.getElementById("dec-hour");
         const dec_min = document.getElementById("dec-min");
+        const up_am_pm = document.getElementById("up-am-pm");
+        const down_am_pm = document.getElementById("down-am-pm");
         const cancel_edit_btn = document.getElementById("cancel_edit_btn");
         const auto_schedule_btn = document.getElementById("auto_schedule_btn");
 
@@ -265,6 +260,8 @@ body{
         inc_min.style.display = "none";
         dec_hour.style.display = "none";
         dec_min.style.display = "none";
+        up_am_pm.style.display = "none";
+        down_am_pm.style.display = "none";
 
 
         cancel_edit_btn.style.display = "hidden";
@@ -426,7 +423,15 @@ body{
 
                 </div>
 
-                <div id="alarm-am-pm">AM</div>
+                <div id="alarm-am-pm">
+                    
+                    <h1 id="up-am-pm">^</h1>
+
+                    AM
+                
+                    <h1 id="down-am-pm">^</h1>
+
+                </div>
 
             </div>
 
