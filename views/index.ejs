@@ -571,6 +571,9 @@ body{
         const alarm_set_text = document.getElementById("alarm-set-text");
         const cancel_edit_btn = document.getElementById("cancel_edit_btn");
         const auto_schedule_btn = document.getElementById("auto_schedule_btn");
+        const confirm_song_btn = document.getElementById("confirm-song-btn");
+        const cancel_song_btn = document.getElementById("cancel-song-btn");
+        const more_songs_container = document.getElementById("more-songs-container");
 
         disable_alarm();
         update_clock();
@@ -643,9 +646,30 @@ body{
             e.stopPropagation();
         });
 
+        confirm_song_btn.addEventListener("click", (e)=>{
+            //TODO
+            alert("Not implemented yet")
+
+            e.stopPropagation();
+        });
+
+        cancel_song_btn.addEventListener("click", (e)=>{
+            //TODO
+            alert("Not implemented yet")
+            e.stopPropagation();
+        });
+
         song_row.addEventListener("click", (e)=>{
             //TODO
             toggle_song_row();
+
+            e.stopPropagation();
+        });
+
+
+        more_songs_container.addEventListener("click", (e)=>{
+            //TODO
+            alert("Not implemented yet")
             e.stopPropagation();
         });
 
