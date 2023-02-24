@@ -82,9 +82,10 @@ body{
 
     flex: 3;
     max-width: 0;
-    overflow: hidden;
+    overflow-y: scroll;
+
     border-left: 1px solid black;
-    height: 100vh;
+    height: 100%;
 }
 
 #alarm-text{
@@ -217,7 +218,8 @@ body{
 }
 .song-name{
 
-
+    text-align: start;
+    padding-left: 3vw;
 
 }
 
@@ -538,7 +540,7 @@ body{
         add_listed_song("Song 4", "https://media.timeout.com/images/102187439/image.jpg")
         add_listed_song("Song 5", "https://media.timeout.com/images/102187439/image.jpg")
         add_listed_song("Song 6", "https://media.timeout.com/images/102187439/image.jpg")
-
+        add_listed_song("Song 7", "https://media.timeout.com/images/102187439/image.jpg")
         alarm_row.addEventListener("click", toggle_alarm_row);
 
         inc_hour.addEventListener("click", (e)=>{
