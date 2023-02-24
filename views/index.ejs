@@ -283,7 +283,6 @@ body{
             song: song,
 
         }
-        console.log(JSON.stringify(alarm))
         fetch("/update_server", {
             method: "POST",
             headers: {
@@ -300,7 +299,6 @@ body{
                 "Content-Type": "application/json"
             }
         }).then(response => response.json()).then(data => {
-            console.log(data)
             if(data.enabled){
                 set_alarm();
             }else{
@@ -396,7 +394,6 @@ body{
 
         alarm_row_expanded = false;
         copy_time(time, time_cache);
-        console.log(time_cache)
 
         const alarm_row = document.getElementById("alarm-row");
         const alarm_set_row = document.getElementById("alarm-set-row");
