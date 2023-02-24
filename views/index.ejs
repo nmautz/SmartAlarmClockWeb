@@ -145,13 +145,11 @@ body{
     transform: rotate(180deg);
 }
 
-
-#cancel_edit_btn, #auto_schedule_btn{
+#cancel_edit_btn, #auto_schedule_btn, #confirm-song-btn, #cancel-song-btn{
 
 
     position: absolute;
     display: hidden;
-    bottom: 20vh;
     opacity: 0;
 
     height: 50px;
@@ -172,14 +170,35 @@ body{
 #auto_schedule_btn{
 
     right: 10vw;
+    bottom: 20vh;
+
 
 
 }
 
 #cancel_edit_btn{
     left: 10vw;
+    bottom: 20vh;
+
 
 }
+
+#confirm-song-btn{
+
+    left: 10vw;
+    bottom: 20vh;
+
+
+}
+
+#cancel-song-btn{
+
+    left: 10vw;
+    bottom: 10vh;
+
+    
+}
+
 
 #song-list{
     margin-top: 5vh;
@@ -222,6 +241,8 @@ body{
     padding-left: 3vw;
 
 }
+
+
 
 
 
@@ -460,6 +481,8 @@ body{
         const song_img = document.getElementById("song-img");
         const song_name = document.getElementById("song-name");
         const song_artist = document.getElementById("song-artist");
+        const confirm_song_btn = document.getElementById("confirm-song-btn");
+        const cancel_song_btn = document.getElementById("cancel-song-btn");
 
         more_songs_container.style.maxWidth = "0px";
 
@@ -469,6 +492,14 @@ body{
         song_img.style.height = "200px";
         song_name.style.fontSize = "2em";
         song_artist.style.fontSize = "1.5em";
+
+        confirm_song_btn.style.transition = "all 3ms ease-in-out";
+        cancel_song_btn.style.transition = "all 3ms ease-in-out";
+        confirm_song_btn.style.display = "hidden";
+        cancel_song_btn.style.display = "hidden";
+        confirm_song_btn.style.opacity = "0";
+        cancel_song_btn.style.opacity = "0";
+
 
 
     }
@@ -483,6 +514,9 @@ body{
         const song_name = document.getElementById("song-name");
         const song_artist = document.getElementById("song-artist");
 
+        const confirm_song_btn = document.getElementById("confirm-song-btn");
+        const cancel_song_btn = document.getElementById("cancel-song-btn");
+
         more_songs_container.style.maxWidth = "100%";
         song_row.style.alignItems = "flex-start";
 
@@ -490,6 +524,13 @@ body{
         song_img.style.height = "100px";
         song_name.style.fontSize = "1.5em";
         song_artist.style.fontSize = "1em";
+
+        confirm_song_btn.style.display = "block";
+        cancel_song_btn.style.display = "block";
+        confirm_song_btn.style.opacity = "1";
+        cancel_song_btn.style.opacity = "1";
+        confirm_song_btn.style.transition = "all 900ms ease-in-out";
+        cancel_song_btn.style.transition = "all 900ms ease-in-out";
     }
 
 
@@ -676,6 +717,9 @@ body{
                 <h2 id="song-name">Wesleys Theory</h2>
                 <h3 id="song-artist">Kendrick Lamar</h3>
             </div>
+
+            <button id="confirm-song-btn">Confirm</button>
+            <button id="cancel-song-btn">Cancel</button>
 
             <div id="more-songs-container">
                 <input type="text" id="song-search-bar" placeholder="Search for a song">
