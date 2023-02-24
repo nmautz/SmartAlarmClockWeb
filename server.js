@@ -13,6 +13,8 @@ app.use(bodyParser.urlencoded({
 app.use(express.json());
 alarm = {
 
+    enabled: false,
+
     time: {
         hour: 7,
         minute: 30,
