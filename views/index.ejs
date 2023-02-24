@@ -267,7 +267,35 @@ body{
         meridium: "AM"
     }
 
+    var song = {
+        name: "To Pimp a Butterfly",
+        artist: "Kendrick Lamar",
+        cover_src: "https://media.timeout.com/images/102187439/image.jpg"
+    }
+
     copy_time(time, time_cache)
+
+    function update_server_api(){
+
+        let alarm = {
+
+            time: time,
+            song: song,
+
+        }
+        console.log(JSON.stringify(alarm))
+        fetch("/update_server", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(alarm)
+        })
+    }
+
+    function update_self_api(){
+
+    }
 
     function toggle_alarm_set(){
 
@@ -276,6 +304,7 @@ body{
         }else{
             set_alarm();
         }
+        update_server_api();
 
 
     }
@@ -301,6 +330,7 @@ body{
         }else{
             expand_alarm_row();
         }
+        update_server_api();
     }
 
     function expand_alarm_row(){
@@ -461,6 +491,7 @@ body{
         }else{
             time.meridium = "AM";
         }
+        update_server_api();
     }
 
     function toggle_song_row(){
@@ -470,6 +501,7 @@ body{
         }else{
             expand_song_row();
         }
+        update_server_api();
 
     }
 

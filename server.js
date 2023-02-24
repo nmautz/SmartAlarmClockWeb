@@ -1,8 +1,16 @@
 
 express = require('express');
 app = express();
+bodyParser = require('body-parser');
+
 app.set('view engine', 'ejs');
 
+// configure the app to use bodyParser()
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
+
+app.use(express.json());
 alarm = {
 
     time: {
@@ -12,7 +20,8 @@ alarm = {
     },
 
     song: {
-        name: "song.mp3",
+        name: "To Pimp a Butterfly",
+        artist: "Kendrick Lamar",
         cover_src: "https://media.timeout.com/images/102187439/image.jpg"
     }
 
