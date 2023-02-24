@@ -83,6 +83,8 @@ body{
     flex: 3;
     max-width: 0;
     overflow: hidden;
+    border-left: 1px solid black;
+    height: 100vh;
 }
 
 #alarm-text{
@@ -178,14 +180,46 @@ body{
 
 }
 
-.song-li{
+#song-list{
+    margin-top: 5vh;
+    padding-left: 3vw;
+    padding-right: 3vw;
+    padding-top: 3vh;
+    padding-bottom: 3vh;
+    border-top: 1px solid black;
+
 }
 
 .song-li-inner-container{
     display: grid;
     grid-template-columns: 50px 1fr;
+    border-bottom: 1px solid black;
+    align-items: center;
+    padding-top: 1vh;
+    padding-bottom: 1vh;
+
+
 }
 
+#song-search-bar{
+
+    margin-top: 5vh;
+
+
+}
+
+.song-img{
+    height:40px;
+    width: 40px;
+    object-fit: cover;
+    padding: 15%;
+    background-color: rgb(205, 205, 205);
+}
+.song-name{
+
+
+
+}
 
 
 
@@ -456,6 +490,20 @@ body{
         song_artist.style.fontSize = "1em";
     }
 
+
+    function add_listed_song(song_name,img_href){
+
+        const song_list = document.getElementById("song-list");
+        const song = document.createElement("div");
+        song.classList.add("song-li-inner-container");
+        song.innerHTML = `
+            <img src="${img_href}" class="song-img">
+            <div class="song-name">${song_name}</div>
+        `;
+        song_list.appendChild(song);
+
+    }
+
     document.addEventListener("DOMContentLoaded", ()=>{
 
         //detect if mobile device 
@@ -483,6 +531,13 @@ body{
 
         disable_alarm();
         update_clock();
+
+        add_listed_song("Song 1", "https://media.timeout.com/images/102187439/image.jpg")
+        add_listed_song("Song 2", "https://media.timeout.com/images/102187439/image.jpg")
+        add_listed_song("Song 3", "https://media.timeout.com/images/102187439/image.jpg")
+        add_listed_song("Song 4", "https://media.timeout.com/images/102187439/image.jpg")
+        add_listed_song("Song 5", "https://media.timeout.com/images/102187439/image.jpg")
+        add_listed_song("Song 6", "https://media.timeout.com/images/102187439/image.jpg")
 
         alarm_row.addEventListener("click", toggle_alarm_row);
 
@@ -621,19 +676,11 @@ body{
             </div>
 
             <div id="more-songs-container">
-                <h1>More Songs</h1>
-                <ul>
-                    <li class="song-li">
-                        <div class="song-li-inner-container">
-                            <img class="song-li-img" src="https://media.timeout.com/images/102187439/image.jpg" width="40px" height="40px" style="object-fit: cover;">
-                            <p>Song 1</p>
-                        </div>
- 
+                <input type="text" id="song-search-bar" placeholder="Search for a song">
+                <div id="song-list">
 
-                    </li>
-
-
-                </ul>
+                </div>
+                
 
             </div>
 
