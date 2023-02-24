@@ -17,7 +17,7 @@ alarm = {
 
     time: {
         hour: 7,
-        minute: 30,
+        min: 30,
         meridium: "AM"
     },
 

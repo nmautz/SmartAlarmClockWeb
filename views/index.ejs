@@ -294,7 +294,24 @@ body{
     }
 
     function update_self_api(){
-
+        fetch("/update_client", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            }
+        }).then(response => response.json()).then(data => {
+            console.log(data)
+            if(data.enabled){
+                set_alarm();
+            }else{
+                disable_alarm();
+            }
+            copy_time(data.time, time);
+            copy_time(data.time, time_cache);
+            update_clock();
+            song = data.song;
+           // update_song();
+        })
     }
 
     function toggle_alarm_set(){
@@ -607,8 +624,7 @@ body{
         const cancel_song_btn = document.getElementById("cancel-song-btn");
         const more_songs_container = document.getElementById("more-songs-container");
 
-        disable_alarm();
-        update_clock();
+        update_self_api();
 
         add_listed_song("Song 1", "https://media.timeout.com/images/102187439/image.jpg")
         add_listed_song("Song 2", "https://media.timeout.com/images/102187439/image.jpg")
