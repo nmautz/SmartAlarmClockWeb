@@ -189,6 +189,7 @@ body{
 
     left: 10vw;
     bottom: 20svh;
+    padding: 0;
 
 
 }
@@ -196,6 +197,8 @@ body{
 #cancel-song-btn{
 
     left: 10vw;
+    padding: 0;
+
     bottom: 10svh;
 
     
@@ -456,6 +459,23 @@ body{
 
     }
 
+    function populate_song_search_list(songs){
+        console.log("Populating song list");
+        console.log(songs);
+        let tracks = songs.tracks.items;
+        const song_search_list = document.getElementById("song-search-list");
+        //foreach track 
+        clear_song_search_list();
+        for(let i = 0; i < tracks.length; ++i){
+
+
+            add_listed_song(tracks[i].name, tracks[i].artists[0].name, tracks[i].id, tracks[i].album.images[0].url);
+
+
+        }
+
+    }
+
     function copy_time(src, dst){
 
         dst.hour = src.hour;
@@ -581,6 +601,10 @@ body{
         cancel_song_btn.style.transition = "all 900ms ease-in-out";
     }
 
+    function clear_song_search_list(){
+        const song_search_list = document.getElementById("song-list");
+        song_search_list.innerHTML = "";
+    }
 
     function add_listed_song(song_name,img_href){
 
@@ -625,13 +649,6 @@ body{
 
         update_self_api();
 
-        add_listed_song("Song 1", "https://media.timeout.com/images/102187439/image.jpg")
-        add_listed_song("Song 2", "https://media.timeout.com/images/102187439/image.jpg")
-        add_listed_song("Song 3", "https://media.timeout.com/images/102187439/image.jpg")
-        add_listed_song("Song 4", "https://media.timeout.com/images/102187439/image.jpg")
-        add_listed_song("Song 5", "https://media.timeout.com/images/102187439/image.jpg")
-        add_listed_song("Song 6", "https://media.timeout.com/images/102187439/image.jpg")
-        add_listed_song("Song 7", "https://media.timeout.com/images/102187439/image.jpg")
         alarm_row.addEventListener("click", toggle_alarm_row);
 
         inc_hour.addEventListener("click", (e)=>{
@@ -717,10 +734,36 @@ body{
 
         more_songs_container.addEventListener("click", (e)=>{
             //TODO
-            alert("Not implemented yet")
             e.stopPropagation();
         });
 
+
+        //onkeypress
+        document.addEventListener("keypress", (e)=>{
+            if(e.key == "Enter"){
+                const song_search_bar = document.getElementById("song-search-bar");
+
+                //if search bar is focused
+                if(song_search_bar == document.activeElement){
+                    //TODO
+                    console.log(song_search_bar.value)
+                    let search_val = song_search_bar.value;
+                    fetch('/search_song', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            search_string: search_val
+                        })
+                    }).then((response)=>{
+                        return response.json();
+                    }).then((data)=>{
+                        populate_song_search_list(data);
+                    })
+                }
+            }
+        });
         
 
 
