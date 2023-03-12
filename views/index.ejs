@@ -344,6 +344,19 @@ body{
         alarm_set_text.style.color = "red";
 
     }
+
+    preview_audio = null;
+
+    function stop_song_preview(){
+        if(preview_audio != null)
+            preview_audio.pause();
+    }
+
+    function play_song_preview(preview_url){
+        preview_audio = new Audio(preview_url);
+        preview_audio.play();
+    }
+
     function toggle_alarm_row(){
         if(alarm_row_expanded){
             shrink_alarm_row();
@@ -469,7 +482,7 @@ body{
         for(let i = 0; i < tracks.length; ++i){
 
 
-            add_listed_song(tracks[i].name, tracks[i].artists[0].name, tracks[i].id, tracks[i].album.images[0].url);
+            add_listed_song(tracks[i].name, tracks[i].album.images[2].url, tracks[i].preview_url)
 
 
         }
@@ -606,7 +619,7 @@ body{
         song_search_list.innerHTML = "";
     }
 
-    function add_listed_song(song_name,img_href){
+    function add_listed_song(song_name,img_href, sample_href){
 
         const song_list = document.getElementById("song-list");
         const song = document.createElement("div");
@@ -615,6 +628,13 @@ body{
             <img src="${img_href}" class="song-img">
             <div class="song-name">${song_name}</div>
         `;
+        if(sample_href != null){
+            song.addEventListener("click", ()=>{
+                stop_song_preview();
+                play_song_preview(sample_href);
+            });
+        }
+
         song_list.appendChild(song);
 
     }
@@ -748,6 +768,9 @@ body{
                     //TODO
                     console.log(song_search_bar.value)
                     let search_val = song_search_bar.value;
+                    clear_song_search_list();
+                    //TODO TEMP REMOVE
+                    add_listed_song("Searching", "/loading.gif")
                     fetch('/search_song', {
                         method: 'POST',
                         headers: {

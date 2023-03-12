@@ -29,6 +29,9 @@ app.get('/login', (req, res) => {
 
 app.set('view engine', 'ejs');
 
+//use public folder
+app.use(express.static('public'));
+
 // configure the app to use bodyParser()
 app.use(bodyParser.urlencoded({
     extended: true
@@ -56,7 +59,6 @@ alarm = {
 
 var spotify_is_init = false;
 app.get('/callback', function(req, res) {
-    console.log("Serving index")
 
 
     const error = req.query.error;
@@ -70,9 +72,12 @@ app.get('/callback', function(req, res) {
     }
 
     if(spotify_is_init){
-        res.render('index')
+        res.redirect('/')
         return;
     }
+
+    console.log("init spotify with code: " + code)
+
     spotify_is_init = true;
     spotifyApi
     .authorizationCodeGrant(code)
@@ -102,8 +107,7 @@ app.get('/callback', function(req, res) {
     });
 
 
-
-    res.render('index')
+    res.redirect('/')
 
 });
 
