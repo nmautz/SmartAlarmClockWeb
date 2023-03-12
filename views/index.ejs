@@ -222,8 +222,23 @@ body{
     align-items: center;
     padding-top: 1svh;
     padding-bottom: 1svh;
+    position: relative;
 
 
+}
+
+.song-li-ui{
+    position: absolute;
+    opacity: 0.5;
+    height:40px;
+    width: 40px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: auto;
+    margin-bottom: auto;
+    left: 0;
+    right: 0;
+    z-index: 5;
 }
 
 #song-search-bar{
@@ -232,6 +247,14 @@ body{
 
 
 }
+.song-li-img-container{
+    height: 40px;
+    width: 40px;
+    background-color: rgb(205, 205, 205);
+    opacity: 0.1;
+    position: relative;
+    z-index: 1;
+}
 
 .song-img{
     height:40px;
@@ -239,6 +262,9 @@ body{
     object-fit: cover;
     padding: 15%;
     background-color: rgb(205, 205, 205);
+    opacity: 0.1;
+    position: absolute;
+    z-index: 1;
 }
 .song-name{
 
@@ -623,17 +649,36 @@ body{
 
         const song_list = document.getElementById("song-list");
         const song = document.createElement("div");
+        const song_img = document.createElement("img");
+        const song_name_div = document.createElement("div");
+        const song_img_container = document.createElement("div");
+
+        song_img_container.classList.add("song-li-img-container");
+        song_img.src = img_href;
+        song_name_div.innerHTML = song_name;
+        song_img.classList.add("song-img");
+        song_name_div.classList.add("song-name");
+
         song.classList.add("song-li-inner-container");
-        song.innerHTML = `
-            <img src="${img_href}" class="song-img">
-            <div class="song-name">${song_name}</div>
-        `;
+        song_img_container.appendChild(song_img);
+        song.appendChild(song_img_container);
+        song.appendChild(song_name_div);
         if(sample_href != null){
             song.addEventListener("click", ()=>{
                 stop_song_preview();
                 play_song_preview(sample_href);
             });
         }
+
+        const song_ui = document.createElement("img");
+
+        song_ui.classList.add("song-li-ui");
+
+        song_ui.src = "play-xxl.png";
+
+        song_img_container.appendChild(song_ui);
+
+
 
         song_list.appendChild(song);
 
