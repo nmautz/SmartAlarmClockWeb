@@ -229,7 +229,7 @@ body{
 
 .song-li-ui{
     position: absolute;
-    opacity: 0.5;
+    opacity: 0;
     height:40px;
     width: 40px;
     margin-left: auto;
@@ -239,6 +239,14 @@ body{
     left: 0;
     right: 0;
     z-index: 5;
+    transition: all 300ms ease-in-out;
+    background-color: white;
+
+}
+
+.song-li-ui:hover{
+    cursor: pointer;
+    opacity: 0.5;
 }
 
 #song-search-bar{
@@ -676,14 +684,18 @@ body{
                 if(current_song == song){
                     current_song.getElementsByClassName("song-li-ui")[0].src = "play-xxl.png";
                     current_song = null;
+                    song_ui.style.opacity = "";
                     stop_song_preview();
 
                 }else{
                     if(current_song != null){
-                        current_song.getElementsByClassName("song-li-ui")[0].src = "play-xxl.png";
+                        let other_song = current_song.getElementsByClassName("song-li-ui")[0]
+                        other_song.src = "play-xxl.png";
+                        other_song.style.opacity = "";
                     }
                     current_song = song;
                     song_ui.src = "pause-xxl.png";
+                    song_ui.style.opacity = "0.5";
                     stop_song_preview();
                     play_song_preview(sample_href);
                 }
