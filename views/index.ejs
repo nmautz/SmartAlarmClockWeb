@@ -376,6 +376,7 @@ body{
     }
 
     preview_audio = null;
+    current_song = null;
 
     function stop_song_preview(){
         if(preview_audio != null)
@@ -656,6 +657,7 @@ body{
         const song_img = document.createElement("img");
         const song_name_div = document.createElement("div");
         const song_img_container = document.createElement("div");
+        const song_ui = document.createElement("img");
 
         song_img_container.classList.add("song-li-img-container");
         song_img.src = img_href;
@@ -669,12 +671,26 @@ body{
         song.appendChild(song_name_div);
         if(sample_href != null){
             song.addEventListener("click", ()=>{
-                stop_song_preview();
-                play_song_preview(sample_href);
+                console.log("song clicked");
+
+                if(current_song == song){
+                    current_song.getElementsByClassName("song-li-ui")[0].src = "play-xxl.png";
+                    current_song = null;
+                    stop_song_preview();
+
+                }else{
+                    if(current_song != null){
+                        current_song.getElementsByClassName("song-li-ui")[0].src = "play-xxl.png";
+                    }
+                    current_song = song;
+                    song_ui.src = "pause-xxl.png";
+                    stop_song_preview();
+                    play_song_preview(sample_href);
+                }
+
             });
         }
 
-        const song_ui = document.createElement("img");
 
         song_ui.classList.add("song-li-ui");
 
