@@ -21,7 +21,10 @@ var spotifyApi = new SpotifyWebApi({
 });
 
 app.get('/login', (req, res) => {
-    res.redirect(spotifyApi.createAuthorizeURL(scopes));
+    let auth_login_url = spotifyApi.createAuthorizeURL(scopes)
+    console.log("Login URL: "+  auth_login_url)
+    res.statusCode = 307
+    res.redirect(auth_login_url);
 });
 
 
@@ -112,11 +115,11 @@ app.get('/callback', function(req, res) {
 });
 
 app.get('/', (req, res) => {
-    console.log("Serving index")
     if(!spotify_is_init){
         res.redirect('/login')
         return;
     }
+    console.log("Serving index")
     res.render('index')
 });
 
