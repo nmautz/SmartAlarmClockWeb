@@ -75,6 +75,7 @@ app.get('/callback', function(req, res) {
     }
 
     if(spotify_is_init){
+        res.statusCode = 307
         res.redirect('/')
         return;
     }
@@ -109,13 +110,14 @@ app.get('/callback', function(req, res) {
     res.send(`Error getting Tokens: ${error}`);
     });
 
-
+    res.statusCode = 307
     res.redirect('/')
 
 });
 
 app.get('/', (req, res) => {
     if(!spotify_is_init){
+        res.statusCode = 307
         res.redirect('/login')
         return;
     }
