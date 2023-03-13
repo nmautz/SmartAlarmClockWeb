@@ -523,12 +523,11 @@ body{
 
                         if(hour > 12){
                             hour = hour - 12;
-                            am_pm = "PM";
+                            time.meridium = "PM";
                         }else{
-                            am_pm = "AM";
+                            time.meridium = "AM";
                         }
 
-                        time.am_pm = am_pm;
 
                         //remove leading 0 from min and hour
                         if(hour[0] == "0"){
