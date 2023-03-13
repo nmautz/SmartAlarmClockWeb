@@ -193,6 +193,19 @@ body{
     padding: 0;
 
 
+
+}
+
+#confirm-song-btn:active, #cancel-song-btn:active{
+    transition: background-color 20ms ease-in-out !important;
+}
+
+#confirm-song-btn:active{
+    background-color: rgb(0, 113, 0);
+}
+
+#cancel-song-btn:active{
+    background-color: rgb(113, 0, 0);
 }
 
 #cancel-song-btn{
@@ -253,6 +266,12 @@ body{
 #song-search-bar{
 
     margin-top: 5svh;
+    width: 50vw;
+    height: 6svh;
+
+    text-align: center;
+    font-size: 1.5em;
+    font-family: "Arial";
 
 
 }
@@ -847,11 +866,16 @@ body{
 
         confirm_song_btn.addEventListener("click", (e)=>{
             //TODO NOW
-            song_cache = song;
-            clear_song_search_list();
-            stop_song_preview();
-            shrink_song_row();
-            update_server_api();
+            try{
+                song_cache = song;
+                clear_song_search_list();
+                stop_song_preview();
+                shrink_song_row();
+                update_server_api();
+            }catch(e){
+                console.log(e);
+            }
+
 
             e.stopPropagation();
         });
