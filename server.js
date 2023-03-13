@@ -16,7 +16,7 @@ var scopes = ['user-read-private', 'user-read-email'],
 var spotifyApi = new SpotifyWebApi({
     clientId: 'dd52c3df12c84d46ad74c1714fef2dd7',
     clientSecret: '88809c501e8b4311bad38a7bd4c58f61',
-    redirectUri: 'http://localhost:8888/callback'
+    redirectUri: 'http://nenemac.local:8888/callback'
 
 });
 
