@@ -861,7 +861,29 @@ body{
 
         auto_schedule_btn.addEventListener("click", (e)=>{
             //TODO
+
+            fetch('/next_calendar_event', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            }).then(data => data.text()).then(data => {
+                //data formated
+                //2023-03-13T11:30:00-07:00 - Do laundrt
+                //extract date time and event name
+                let date_time = data.split(" - ")[0];
+                let event_name = data.split(" - ")[1];
+
+                let year = date_time.split("-")[0];
+                let month = date_time.split("-")[1];
+                let day = date_time.split("-")[2].split("T")[0];
+                let hour = date_time.split("T")[1].split(":")[0];
+                let min = date_time.split(":")[1];
+
+                
+            
             e.stopPropagation();
+            });
         });
 
         confirm_song_btn.addEventListener("click", (e)=>{
