@@ -383,7 +383,11 @@ body{
         })
     }
 
-    function update_self_api(){
+    function update_self_api(callback){
+
+        if(callback == null){
+            callback = function(){};
+        }
         fetch("/update_client", {
             method: "POST",
             headers: {
@@ -400,6 +404,7 @@ body{
             update_clock();
             song = data.song;
             load_server_song(song)
+            callback(data);
         })
     }
 
@@ -942,7 +947,15 @@ body{
         const cancel_song_btn = document.getElementById("cancel-song-btn");
         const more_songs_container = document.getElementById("more-songs-container");
 
-        update_self_api();
+        update_self_api((data)=>{
+
+
+            if(data.auto_set){
+                toggle_auto_alarm();
+            }
+
+        });
+
 
         alarm_row.addEventListener("click", toggle_alarm_row);
 
