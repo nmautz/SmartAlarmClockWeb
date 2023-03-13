@@ -150,6 +150,7 @@ app.get('/next_calendar_event', (req, res) => {
     authorize().then((auth) => {
 
         getCalendarEvents(auth, (data)=>{
+            console.log(`Sending data: ${data}`)
             res.send(data)
 
 

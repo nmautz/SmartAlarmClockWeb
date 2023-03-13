@@ -479,6 +479,9 @@ body{
     function set_next_auto_alarm(){
 
 
+        document.getElementById("auto_schedule_btn").innerHTML = "LOADING...";
+
+
         fetch('/next_calendar_event', {
                 method: 'GET',
                 headers: {
@@ -497,10 +500,59 @@ body{
                 let hour = date_time.split("T")[1].split(":")[0];
                 let min = date_time.split(":")[1];
 
+                document.getElementById("auto_schedule_btn").innerHTML = "AUTO"
 
-            
-            e.stopPropagation();
+                //get current date 
+
+                let current_date = new Date();
+                let current_year = current_date.getFullYear();
+                let current_month = current_date.getMonth() + 1;
+                let current_day = current_date.getDate();
+                if(current_month == month && current_day == day && current_year == year){
+                    //same day
+
+
+                    //check if less than 24 hours away
+                    let current_hour = current_date.getHours();
+                    let current_min = current_date.getMinutes();
+                    if(hour - current_hour < 24){
+                        //less than 24 hours away
+                        //set alarm
+
+                        //ajust to 12 hour time
+
+                        if(hour > 12){
+                            hour = hour - 12;
+                            am_pm = "PM";
+                        }else{
+                            am_pm = "AM";
+                        }
+
+                        time.am_pm = am_pm;
+
+                        //remove leading 0 from min and hour
+                        if(hour[0] == "0"){
+                            hour = hour[1];
+                        }
+                        if(min[0] == "0"){
+                            min = min[1];
+                        }
+
+                        time.hour = hour;
+                        time.min = min;
+                        time_cache.hour = hour;
+                        time_cache.min = min;
+                        update_server_api();
+                        update_clock();
+                    }else{
+                        alert("Next event is more than 24 hours away...")
+                    }
+                }
+
+
+
             });
+
 
     }
 
@@ -660,6 +712,8 @@ body{
             auto_set_alarm = true;
             document.getElementById("auto_schedule_btn").style.backgroundColor = "black";
             document.getElementById("auto_schedule_btn").style.color = "white";
+            set_next_auto_alarm();
+
         }
     }
 
