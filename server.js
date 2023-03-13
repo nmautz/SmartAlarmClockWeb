@@ -19,6 +19,22 @@ const SCOPES = ['https://www.googleapis.com/auth/calendar.readonly'];
 const TOKEN_PATH = path.join(process.cwd(), 'token.json');
 const CREDENTIALS_PATH = path.join(process.cwd(), 'credentials.json');
 
+
+function save_alarm() {
+    fs.writeFile('alarm.json', JSON.stringify(alarm), function (err) {
+        if (err) return console.log(err);
+        console.log('Alarm saved');
+    });
+}
+
+function load_alarm() {
+    fs.readFile('alarm.json', function (err, data) {
+        if (err) return console.log(err);
+        alarm = JSON.parse(data);
+        console.log('Alarm loaded');
+    });
+}
+
 /**
  * Reads previously authorized credentials from the save file.
  *
@@ -193,7 +209,9 @@ alarm = {
     }
 
 
-}
+} //default alarm
+
+load_alarm()
 alarm_playing = false
 
 function play_alarm(){
@@ -354,6 +372,7 @@ app.post('/update_server', (req, res)=>{
 
     console.log("Updating server")
     alarm = req.body
+    save_alarm()
     console.log(alarm.song.uri)
     res.send("Alarm updated")
 
