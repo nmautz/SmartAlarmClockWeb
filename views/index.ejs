@@ -627,6 +627,7 @@ body{
     }
 
     function shrink_song_row(){
+        stop_song_preview();
         song_row_expanded = false;
         const song_row = document.getElementById("song-row");
         const current_song_container = document.getElementById("current-song-container");
@@ -869,7 +870,6 @@ body{
             try{
                 song_cache = song;
                 clear_song_search_list();
-                stop_song_preview();
                 shrink_song_row();
                 update_server_api();
             }catch(e){

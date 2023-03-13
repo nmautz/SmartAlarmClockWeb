@@ -23,7 +23,7 @@ var spotifyApi = new SpotifyWebApi({
 app.get('/login', (req, res) => {
     let auth_login_url = spotifyApi.createAuthorizeURL(scopes)
     console.log("Login URL: "+  auth_login_url)
-    res.statusCode = 307
+    res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
     res.redirect(auth_login_url);
 });
 
@@ -75,7 +75,7 @@ app.get('/callback', function(req, res) {
     }
 
     if(spotify_is_init){
-        res.statusCode = 307
+        res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
         res.redirect('/')
         return;
     }
@@ -103,7 +103,7 @@ app.get('/callback', function(req, res) {
         console.log("access token refreshed")
     }, expires_in * .9 * 60*60);
 
-    res.statusCode = 307
+    res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
     res.redirect('/')
 
 
@@ -119,7 +119,7 @@ app.get('/callback', function(req, res) {
 
 app.get('/', (req, res) => {
     if(!spotify_is_init){
-        res.statusCode = 307
+        res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
         res.redirect('/login')
         return;
     }
