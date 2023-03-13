@@ -317,7 +317,14 @@ body{
     bottom: 1.5svh;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 0.5em;
+    background-color: rgb(158, 158, 158);
+    padding-left: 2vw;
 
+    padding-right: 2vw;
+    padding-top: 1svh;
+    padding-bottom: 1svh;
+    border-radius: 20px;
+    display: none;
 
 }
 
@@ -718,16 +725,21 @@ body{
 
     function toggle_auto_alarm(){
 
+        const alarm_event_text =  document.getElementById("alarm-event-text")
 
         if(auto_set_alarm){
             auto_set_alarm = false;
             document.getElementById("auto_schedule_btn").style.backgroundColor = "white";
             document.getElementById("auto_schedule_btn").style.color = "black";
-            document.getElementById("alarm-event-text").innerHTML = "";
+            alarm_event_text.innerHTML = "";
+            alarm_event_text.style.display = "none";
         }else{
             auto_set_alarm = true;
             document.getElementById("auto_schedule_btn").style.backgroundColor = "black";
             document.getElementById("auto_schedule_btn").style.color = "white";
+            alarm_event_text.style.display = "block";
+            alarm_event_text.innerHTML = "Loading Event...";
+
             set_next_auto_alarm();
 
         }
