@@ -312,10 +312,13 @@ body{
     }
 
     var song = {
-        name: "To Pimp a Butterfly",
-        artist: "Kendrick Lamar",
-        cover_src: "https://media.timeout.com/images/102187439/image.jpg"
+        name: "Loading...",
+        artist: "Loading...",
+        cover_src: "https://media.timeout.com/images/102187439/image.jpg",
+        uri: ""
     }
+
+    var song_cache = null
 
     copy_time(time, time_cache)
 
@@ -352,7 +355,7 @@ body{
             copy_time(data.time, time_cache);
             update_clock();
             song = data.song;
-           // update_song();
+            load_server_song(song)
         })
     }
 
@@ -594,6 +597,16 @@ body{
 
     }
 
+    function load_server_song(server_song){
+        const song_img = document.getElementById("song-img");
+        const song_name = document.getElementById("song-name");
+        const song_artist = document.getElementById("song-artist");
+
+        song_img.src = server_song.cover_src
+        song_name.innerHTML = server_song.name;
+        song_artist.innerHTML = server_song.artist;
+    }
+
     function shrink_song_row(){
         song_row_expanded = false;
         const song_row = document.getElementById("song-row");
@@ -662,7 +675,7 @@ body{
     function add_listed_song(song_name,img_href, sample_href, song_obj){
 
         const song_list = document.getElementById("song-list");
-        const song = document.createElement("div");
+        const song_div = document.createElement("div");
         const song_img = document.createElement("img");
         const song_name_div = document.createElement("div");
         const song_img_container = document.createElement("div");
@@ -674,15 +687,15 @@ body{
         song_img.classList.add("song-img");
         song_name_div.classList.add("song-name");
 
-        song.classList.add("song-li-inner-container");
+        song_div.classList.add("song-li-inner-container");
         song_img_container.appendChild(song_img);
-        song.appendChild(song_img_container);
-        song.appendChild(song_name_div);
+        song_div.appendChild(song_img_container);
+        song_div.appendChild(song_name_div);
         if(sample_href != null){
-            song.addEventListener("click", ()=>{
+            song_div.addEventListener("click", ()=>{
                 console.log("song clicked");
 
-                if(current_song == song){
+                if(current_song == song_div){
                     current_song.getElementsByClassName("song-li-ui")[0].src = "play-xxl.png";
                     current_song = null;
                     song_ui.style.opacity = "";
@@ -696,7 +709,7 @@ body{
                         other_song.src = "play-xxl.png";
                         other_song.style.opacity = "";
                     }
-                    current_song = song;
+                    current_song = song_div;
                     song_ui.src = "pause-xxl.png";
                     song_ui.style.opacity = "0.5";
                     stop_song_preview();
@@ -713,11 +726,17 @@ body{
             const song_name = document.getElementById("song-name");
             const song_artist = document.getElementById("song-artist");
 
+
             console.log(song_choice);
 
             song_img.src = song_choice.album.images[0].url;
             song_name.innerHTML = song_choice.name
             song_artist.innerHTML = song_choice.artists[0].name;
+
+            song.artist = song_choice.artists[0].name;
+            song.name = song_choice.name;
+            song.cover_src = song_choice.album.images[0].url;
+            song.uri = song_choice.uri;
 
         }
 
@@ -730,7 +749,7 @@ body{
 
 
 
-        song_list.appendChild(song);
+        song_list.appendChild(song_div);
 
     }
 
@@ -828,6 +847,11 @@ body{
 
         confirm_song_btn.addEventListener("click", (e)=>{
             //TODO NOW
+            song_cache = song;
+            clear_song_search_list();
+            stop_song_preview();
+            shrink_song_row();
+            update_server_api();
 
             e.stopPropagation();
         });

@@ -147,6 +147,7 @@ app.post('/update_server', (req, res)=>{
 
     console.log("Updating server")
     alarm = req.body
+    console.log(alarm.song.uri)
     res.send("Alarm updated")
 
 
