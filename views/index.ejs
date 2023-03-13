@@ -310,6 +310,18 @@ body{
 }
 
 
+#alarm-event-text{
+
+    position: absolute;
+
+    bottom: 1.5svh;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 0.5em;
+
+
+}
+
+
 
 
 
@@ -493,6 +505,8 @@ body{
                 //extract date time and event name
                 let date_time = data.split(" - ")[0];
                 let event_name = data.split(" - ")[1];
+
+                document.getElementById("alarm-event-text").innerHTML = event_name;
 
                 let year = date_time.split("-")[0];
                 let month = date_time.split("-")[1];
@@ -703,10 +717,13 @@ body{
 
 
     function toggle_auto_alarm(){
+
+
         if(auto_set_alarm){
             auto_set_alarm = false;
             document.getElementById("auto_schedule_btn").style.backgroundColor = "white";
             document.getElementById("auto_schedule_btn").style.color = "black";
+            document.getElementById("alarm-event-text").innerHTML = "";
         }else{
             auto_set_alarm = true;
             document.getElementById("auto_schedule_btn").style.backgroundColor = "black";
@@ -1084,6 +1101,8 @@ body{
                     <h1 id="down-am-pm">^</h1>
 
                 </div>
+
+                <div id="alarm-event-text"></div>
 
             </div>
 
