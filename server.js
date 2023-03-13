@@ -9,7 +9,7 @@ var SpotifyWebApi = require('spotify-web-api-node');
 
 
 //Get auth code 
-var scopes = ['user-read-private', 'user-read-email'],
+var scopes = ['user-read-private', 'user-read-email', 'app-remote-control', 'streaming', 'user-read-playback-state', 'user-modify-playback-state', 'user-read-currently-playing'],
   clientId = 'dd52c3df12c84d46ad74c1714fef2dd7',
   state = 'user-read-playback-state';
 
@@ -59,8 +59,25 @@ alarm = {
 
 
 }
-
 alarm_playing = false
+
+function play_alarm(){
+    alarm_playing = true
+    console.log("Alarm time!")
+    if(spotify_is_init){
+        spotifyApi.play({
+            "uris": [alarm.song.uri]
+        })
+        .then(function() {
+            console.log('Playing song!');
+        }, function(err) {
+            console.log('Something went wrong!', err);
+        });
+    }else{
+        console.log("Spotify not init")
+        console.log("Backup Alarm!")
+    }
+}
 alarm_interval = setInterval(() => {
 
     console.log("Checking alarm")
@@ -76,21 +93,7 @@ alarm_interval = setInterval(() => {
     if(hour == alarm.time.hour && min == alarm.time.min && meridium == alarm.time.meridium){
         
         if(!alarm_playing){
-            alarm_playing = true
-            console.log("Alarm time!")
-            if(spotify_is_init){
-                spotifyApi.play({
-                    "uris": [alarm.song.uri]
-                })
-                .then(function() {
-                    console.log('Playing song!');
-                }, function(err) {
-                    console.log('Something went wrong!', err);
-                });
-            }else{
-                console.log("Spotify not init")
-                console.log("Backup Alarm!")
-            }
+            play_alarm()
         }else{
             console.log("Alarm Already Playing!!")
         }
@@ -170,6 +173,14 @@ app.get('/', (req, res) => {
     console.log("Serving index")
     res.render('index')
 });
+
+app.get('/play_alarm', (req, res) => {
+    console.log("Playing alarm")
+    play_alarm()
+    res.send("Attempting to play alarm")
+
+
+})
 
 app.post("/search_song", (req, res) => {
 
