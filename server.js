@@ -182,6 +182,21 @@ app.get('/play_alarm', (req, res) => {
 
 })
 
+app.get('/get_devices', (req, res) => {
+
+
+    spotifyApi.getMyDevices()
+  .then(function(data) {
+    let availableDevices = data.body.devices;
+    res.send(availableDevices);
+  }, function(err) {
+    res.send('Something went wrong!', err);
+  });
+
+})
+
+
+
 app.post("/search_song", (req, res) => {
 
     let search_string = req.body.search_string
