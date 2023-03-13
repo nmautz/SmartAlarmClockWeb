@@ -200,6 +200,10 @@ body{
     transition: background-color 20ms ease-in-out !important;
 }
 
+#auto_schedule_btn:hover{
+    transition: all 20ms ease-in-out !important;
+}
+
 #confirm-song-btn:active{
     background-color: rgb(0, 113, 0);
 }
@@ -319,6 +323,7 @@ body{
     var alarm_row_expanded = false;
     var song_row_expanded = false;
     var alarm_set = false;
+    var auto_set_alarm = false;
     var time = {
         hour: 6,
         min: 30,
@@ -347,6 +352,7 @@ body{
             enabled: alarm_set,
             time: time,
             song: song,
+            auto_set: auto_set_alarm
 
         }
         fetch("/update_server", {
@@ -644,6 +650,19 @@ body{
 
     }
 
+
+    function toggle_auto_alarm(){
+        if(auto_set_alarm){
+            auto_set_alarm = false;
+            document.getElementById("auto_schedule_btn").style.backgroundColor = "white";
+            document.getElementById("auto_schedule_btn").style.color = "black";
+        }else{
+            auto_set_alarm = true;
+            document.getElementById("auto_schedule_btn").style.backgroundColor = "black";
+            document.getElementById("auto_schedule_btn").style.color = "white";
+        }
+    }
+
     function load_server_song(server_song){
         const song_img = document.getElementById("song-img");
         const song_name = document.getElementById("song-name");
@@ -890,6 +909,8 @@ body{
         auto_schedule_btn.addEventListener("click", (e)=>{
             //TODO
 
+            toggle_auto_alarm();
+            e.stopPropagation();
         });
 
         confirm_song_btn.addEventListener("click", (e)=>{
