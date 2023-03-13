@@ -101,7 +101,7 @@ app.get('/callback', function(req, res) {
         // console.log('access_token:', access_token);
         spotifyApi.setAccessToken(access_token);
         console.log("access token refreshed")
-    }, expires_in * .9);
+    }, expires_in * .9 * 60*60);
 
     res.statusCode = 307
     res.redirect('/')
