@@ -97,7 +97,31 @@ async function listEvents(auth) {
   });
 }
 
-authorize().then(listEvents).catch(console.error);
+async function getCalendarEvents(auth, callback) {
+    const calendar = google.calendar({version: 'v3', auth});
+    const res = await calendar.events.list({
+      calendarId: 'primary',
+      timeMin: new Date().toISOString(),
+      maxResults: 1,
+      singleEvents: true,
+      orderBy: 'startTime',
+    });
+    const events = res.data.items;
+    if (!events || events.length === 0) {
+      console.log('No upcoming events found.');
+      return;
+    }
+    console.log('Upcoming 10 events:');
+    events.map((event, i) => {
+      const start = event.start.dateTime || event.start.date;
+      console.log(`${start} - ${event.summary}`);
+      callback(`${start} - ${event.summary}`)
+    });
+  }
+
+
+
+
 
 
 //Get auth code 
@@ -120,6 +144,24 @@ app.get('/login', (req, res) => {
 });
 
 
+
+app.get('/next_calendar_event', (req, res) => {
+
+    authorize().then((auth) => {
+
+        getCalendarEvents(auth, (data)=>{
+            res.send(data)
+
+
+        })
+
+
+    }).catch((err) => {
+        console.error('Error loading client secret file:', err);
+    })
+
+
+});
 
 
 app.set('view engine', 'ejs');
