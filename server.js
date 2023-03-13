@@ -46,9 +46,9 @@ alarm = {
     enabled: false,
 
     time: {
-        hour: 7,
-        min: 30,
-        meridium: "AM"
+        hour: 8,
+        min: 45,
+        meridium: "PM"
     },
 
     song: {
@@ -59,6 +59,50 @@ alarm = {
 
 
 }
+
+alarm_playing = false
+alarm_interval = setInterval(() => {
+
+    console.log("Checking alarm")
+    let now = new Date()
+    let hour = now.getHours()
+    let min = now.getMinutes()
+    let meridium = "AM"
+    if(hour > 12){
+        hour = hour - 12
+        meridium = "PM"
+    }
+
+    if(hour == alarm.time.hour && min == alarm.time.min && meridium == alarm.time.meridium){
+        
+        if(!alarm_playing){
+            alarm_playing = true
+            console.log("Alarm time!")
+            if(spotify_is_init){
+                spotifyApi.play({
+                    "uris": [alarm.song.uri]
+                })
+                .then(function() {
+                    console.log('Playing song!');
+                }, function(err) {
+                    console.log('Something went wrong!', err);
+                });
+            }else{
+                console.log("Spotify not init")
+                console.log("Backup Alarm!")
+            }
+        }else{
+            console.log("Alarm Already Playing!!")
+        }
+
+    }else{
+        alarm_playing = false
+    }
+    
+
+
+}, 1000);
+
 
 var spotify_is_init = false;
 app.get('/callback', function(req, res) {
