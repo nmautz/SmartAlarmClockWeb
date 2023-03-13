@@ -103,6 +103,9 @@ app.get('/callback', function(req, res) {
         console.log("access token refreshed")
     }, expires_in * .9);
 
+    res.statusCode = 307
+    res.redirect('/')
+
 
     })
     .catch(error => {
@@ -110,8 +113,7 @@ app.get('/callback', function(req, res) {
     res.send(`Error getting Tokens: ${error}`);
     });
 
-    res.statusCode = 307
-    res.redirect('/')
+
 
 });
 
