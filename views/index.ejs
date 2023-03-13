@@ -510,6 +510,18 @@ body{
                 //data formated
                 //2023-03-13T11:30:00-07:00 - Do laundrt
                 //extract date time and event name
+
+                if(data == "No upcoming events found."){
+                    document.getElementById("alarm-event-text").innerHTML = data;
+                    document.getElementById("auto_schedule_btn").innerHTML = "AUTO"
+
+                    setTimeout(() => {
+                        toggle_auto_alarm();
+
+                    }, 2000);
+
+                    return;
+                }
                 let date_time = data.split(" - ")[0];
                 let event_name = data.split(" - ")[1];
 

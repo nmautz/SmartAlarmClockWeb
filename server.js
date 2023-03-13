@@ -125,6 +125,7 @@ async function getCalendarEvents(auth, callback) {
     const events = res.data.items;
     if (!events || events.length === 0) {
       console.log('No upcoming events found.');
+      callback(null)
       return;
     }
     console.log('Upcoming 10 events:');
@@ -166,6 +167,9 @@ app.get('/next_calendar_event', (req, res) => {
     authorize().then((auth) => {
 
         getCalendarEvents(auth, (data)=>{
+            if(data == null){
+                data = "No upcoming events found."
+            }
             console.log(`Sending data: ${data}`)
             res.send(data)
 
@@ -368,7 +372,7 @@ app.post("/search_song", (req, res) => {
 
 })
 
-app.post('/update_server', (req, res)=>{
+app.post('/update_server', (req, res)=>{    
 
     console.log("Updating server")
     alarm = req.body
