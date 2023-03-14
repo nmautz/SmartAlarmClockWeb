@@ -415,6 +415,7 @@ body{
             disable_alarm();
         }else{
             set_alarm();
+            
         }
         update_server_api();
 
@@ -520,6 +521,7 @@ body{
                 if(data == "No upcoming events found."){
                     document.getElementById("alarm-event-text").innerHTML = data;
                     document.getElementById("auto_schedule_btn").innerHTML = "AUTO"
+                    disable_alarm();
 
                     setTimeout(() => {
                         toggle_auto_alarm();
@@ -751,12 +753,14 @@ body{
             document.getElementById("auto_schedule_btn").style.color = "black";
             alarm_event_text.innerHTML = "";
             alarm_event_text.style.display = "none";
+            disable_alarm();
         }else{
             auto_set_alarm = true;
             document.getElementById("auto_schedule_btn").style.backgroundColor = "black";
             document.getElementById("auto_schedule_btn").style.color = "white";
             alarm_event_text.style.display = "block";
             alarm_event_text.innerHTML = "Loading Event...";
+            set_alarm();
 
             set_next_auto_alarm();
 
