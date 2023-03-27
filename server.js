@@ -238,6 +238,9 @@ function play_alarm(){
 alarm_interval = setInterval(() => {
 
     console.log("Checking alarm")
+
+    load_alarm()
+
     let now = new Date()
     let hour = now.getHours()
     let min = now.getMinutes()
@@ -330,6 +333,12 @@ app.get('/', (req, res) => {
     console.log("Serving index")
     res.render('index')
 });
+
+app.get('/bypass_spotify', (req, res) => {
+    console.log("Bypassing spotify")
+    spotify_is_init = true;
+    res.send("Bypassing spotify")
+})
 
 app.get('/play_alarm', (req, res) => {
     console.log("Playing alarm")
